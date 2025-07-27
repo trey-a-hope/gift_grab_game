@@ -1,9 +1,9 @@
 // Blocs
 export 'blocs/game/game_bloc.dart';
-
 // Config
 export 'config/constants.dart';
 
+// Game
 export 'game/gift_grab_game.dart';
 
 // Inputs
