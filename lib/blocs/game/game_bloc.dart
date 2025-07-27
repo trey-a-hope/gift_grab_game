@@ -9,7 +9,7 @@ part 'game_state.dart';
 
 class GameBloc extends Bloc<GameEvent, GameState> {
   static const int initialTime = Constants.gameTimeLimit;
-  static const int flameImmunityDuration = 10;
+  static const int flameRemainingTime = 10;
   static const double originalSpeed = 500;
   static const int speedBoostDuration = 7;
 
@@ -37,7 +37,6 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     // Flame related events
     on<DisplayFlameEvent>(_onDisplayFlameEvent);
     on<StartFlameCountdownEvent>(_onStartFlameCountdownEvent);
-    on<DeactivateFlameEvent>(_onDeactivateFlameEvent);
     on<FlameTickEvent>(_onFlameTickEvent);
 
     // Cookie related events
@@ -98,9 +97,9 @@ class GameBloc extends Bloc<GameEvent, GameState> {
   void _onResetGameEvent(ResetGameEvent event, Emitter<GameState> emit) {
     stopTimer();
     emit(
-      GameState(
+      state.copyWith(
         remainingTime: initialTime,
-        flameRemainingTime: flameImmunityDuration,
+        flameRemainingTime: flameRemainingTime,
         speedBoostRemainingTime: speedBoostDuration,
         score: 0,
         isGameOver: false,
@@ -115,18 +114,6 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     _hasSpawnedFlame = false;
     _hasSpawnedCookie = false;
     startTimer();
-  }
-
-  void _onDeactivateFlameEvent(
-    DeactivateFlameEvent event,
-    Emitter<GameState> emit,
-  ) {
-    emit(
-      state.copyWith(
-        isSantaFlamed: false,
-        flameRemainingTime: flameImmunityDuration,
-      ),
-    );
   }
 
   void _onDisplayFlameEvent(DisplayFlameEvent event, Emitter<GameState> emit) {
@@ -144,7 +131,9 @@ class GameBloc extends Bloc<GameEvent, GameState> {
   }
 
   void _onStartGameEvent(StartGameEvent event, Emitter<GameState> emit) {
-    emit(GameState(remainingTime: initialTime, score: 0, isGameOver: false));
+    emit(
+      state.copyWith(remainingTime: initialTime, score: 0, isGameOver: false),
+    );
     startTimer();
   }
 
@@ -159,7 +148,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
     emit(
       state.copyWith(
         isSantaFlamed: true,
-        flameRemainingTime: flameImmunityDuration,
+        flameRemainingTime: flameRemainingTime,
       ),
     );
     _startFlameCountdown();
@@ -179,7 +168,7 @@ class GameBloc extends Bloc<GameEvent, GameState> {
       emit(
         state.copyWith(
           isSantaFlamed: false,
-          flameRemainingTime: flameImmunityDuration,
+          flameRemainingTime: flameRemainingTime,
         ),
       );
     } else {

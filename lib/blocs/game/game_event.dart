@@ -1,37 +1,66 @@
 part of 'game_bloc.dart';
 
-abstract class GameEvent extends Equatable {
-  const GameEvent();
+sealed class GameEvent extends Equatable {}
 
+class StartGameEvent extends GameEvent {
   @override
-  List<Object> get props => [];
+  List<Object?> get props => throw UnimplementedError();
 }
 
-class StartGameEvent extends GameEvent {}
+class ResetGameEvent extends GameEvent {
+  @override
+  List<Object?> get props => throw UnimplementedError();
+}
 
-class ResetGameEvent extends GameEvent {}
+class TimerTickEvent extends GameEvent {
+  @override
+  List<Object?> get props => throw UnimplementedError();
+}
 
-class TimerTickEvent extends GameEvent {}
-
-class ScorePointEvent extends GameEvent {}
+class ScorePointEvent extends GameEvent {
+  @override
+  List<Object?> get props => throw UnimplementedError();
+}
 
 // Flame related events
-class DisplayFlameEvent extends GameEvent {}
+class DisplayFlameEvent extends GameEvent {
+  @override
+  List<Object?> get props => throw UnimplementedError();
+}
 
-class StartFlameCountdownEvent extends GameEvent {}
+class StartFlameCountdownEvent extends GameEvent {
+  @override
+  List<Object?> get props => throw UnimplementedError();
+}
 
-class FlameTickEvent extends GameEvent {}
-
-class DeactivateFlameEvent extends GameEvent {}
+class FlameTickEvent extends GameEvent {
+  @override
+  List<Object?> get props => throw UnimplementedError();
+}
 
 // Santa related events
-class FreezeSantaEvent extends GameEvent {}
+class FreezeSantaEvent extends GameEvent {
+  @override
+  List<Object?> get props => throw UnimplementedError();
+}
 
-class UnfreezeSantaEvent extends GameEvent {}
+class UnfreezeSantaEvent extends GameEvent {
+  @override
+  List<Object?> get props => throw UnimplementedError();
+}
 
 // Cookie related events
-class DisplayCookieEvent extends GameEvent {}
+class DisplayCookieEvent extends GameEvent {
+  @override
+  List<Object?> get props => throw UnimplementedError();
+}
 
-class StartSpeedBoostCountdownEvent extends GameEvent {}
+class StartSpeedBoostCountdownEvent extends GameEvent {
+  @override
+  List<Object?> get props => throw UnimplementedError();
+}
 
-class SpeedBoostTickEvent extends GameEvent {}
+class SpeedBoostTickEvent extends GameEvent {
+  @override
+  List<Object?> get props => throw UnimplementedError();
+}
