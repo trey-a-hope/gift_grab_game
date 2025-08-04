@@ -8,4 +8,10 @@ class BackgroundComponent extends SpriteComponent with HasGameReference {
     sprite = await game.loadSprite(Constants.backgroundSprite);
     size = game.size;
   }
+
+  @override
+  void onGameResize(Vector2 size) {
+    super.onGameResize(size);
+    this.size = size;
+  }
 }

@@ -19,11 +19,6 @@ class SantaComponent extends SpriteGroupComponent<MovementState>
   final double _spriteHeight = 200;
   final JoystickComponent joystick;
 
-  late double _rightBound;
-  late double _leftBound;
-  late double _upBound;
-  late double _downBound;
-
   SantaComponent({required this.joystick});
 
   @override
@@ -47,12 +42,6 @@ class SantaComponent extends SpriteGroupComponent<MovementState>
       MovementState.frozen: santaFrozen,
     };
 
-    // Set boundaries
-    _rightBound = game.size.x - 45;
-    _leftBound = 0 + 45;
-    _upBound = 0 + 55;
-    _downBound = game.size.y - 55;
-
     // Set dimensions
     width = _spriteHeight * 1.42;
     height = _spriteHeight;
@@ -74,11 +63,7 @@ class SantaComponent extends SpriteGroupComponent<MovementState>
       if (joystick.direction == JoystickDirection.idle) {
         current = MovementState.idle;
       } else {
-        // Handle boundaries
-        if (x >= _rightBound) x = _rightBound - 1;
-        if (x <= _leftBound) x = _leftBound + 1;
-        if (y >= _downBound) y = _downBound - 1;
-        if (y <= _upBound) y = _upBound + 1;
+        _keepInBounds();
 
         // Update movement state
         bool moveLeft = joystick.relativeDelta[0] < 0;
@@ -127,5 +112,14 @@ class SantaComponent extends SpriteGroupComponent<MovementState>
   void _handleGiftCollision() {
     bloc.add(ScorePointEvent());
     FlameAudio.play(Constants.itemGrabSound);
+  }
+
+  void _keepInBounds() {
+    if (position.x < 0 || position.x > game.size.x) {
+      position.x = position.x.clamp(0, game.size.x);
+    }
+    if (position.y < 0 || position.y > game.size.y) {
+      position.y = position.y.clamp(0, game.size.y);
+    }
   }
 }
