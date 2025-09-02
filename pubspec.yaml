@@ -16,9 +16,7 @@ dependencies:
   flame_bloc: ^1.12.11
   flutter_bloc: ^9.1.1
   gap: ^3.0.1
-  gift_grab_ui:
-    git: https://github.com/trey-a-hope/gift_grab_ui.git
-    # path: /Users/treyhope/Desktop/Development/gift_grab_ui
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

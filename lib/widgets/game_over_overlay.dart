@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gift_grab_ui/ui.dart';
 
 class GameOverOverlay extends StatelessWidget {
   final int score;
@@ -11,10 +10,9 @@ class GameOverOverlay extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return GGScaffoldWidget(
-      canPop: true,
-      title: 'Game Over',
-      child: Center(
+    return Scaffold(
+      appBar: AppBar(title: Text('Game Over')),
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
